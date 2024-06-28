@@ -8,10 +8,13 @@ const VideoDownload = () => {
 
   const handleFetchInfo = async () => {
     try {
+      console.log("Fetching video info for URL:", url);
       const fetchedInfo = await fetchVideoInfo(url);
+      console.log("Fetched video info:", fetchedInfo);
       setVideoInfo(fetchedInfo);
       setError(null);
     } catch (err) {
+      console.error("Error fetching video info:", err);
       setError("Failed to fetch video information. Please try again.");
     }
   };
