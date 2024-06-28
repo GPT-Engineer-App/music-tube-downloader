@@ -1,19 +1,13 @@
 import React, { useState } from "react";
-import { scrapeVideoInfo } from "../utils/scraper";
+import { fetchVideoInfo } from "../utils/api";
 
 const VideoDownload = () => {
   const [url, setUrl] = useState("");
   const [videoInfo, setVideoInfo] = useState(null);
 
   const handleFetchInfo = async () => {
-    const fetchedInfo = await scrapeVideoInfo(url);
+    const fetchedInfo = await fetchVideoInfo(url);
     setVideoInfo(fetchedInfo);
-  };
-
-  const handleDownload = () => {
-    // Handle video download
-    // This is a placeholder for the actual download logic
-    alert("Downloading video...");
   };
 
   return (
@@ -37,9 +31,13 @@ const VideoDownload = () => {
             <h2 className="text-xl">{videoInfo.title}</h2>
             <p>Duration: {videoInfo.duration}</p>
             <img src={videoInfo.thumbnail} alt="Thumbnail" className="mx-auto" />
-            <button onClick={handleDownload} className="mt-2 p-2 bg-green-500 text-white">
-              Download Video
-            </button>
+            <div className="flex justify-center space-x-2 mt-2">
+              {videoInfo.formats.map((format) => (
+                <a key={format.url} href={format.url} download className="p-2 bg-green-500 text-white">
+                  Download {format.quality}
+                </a>
+              ))}
+            </div>
           </div>
         )}
       </div>

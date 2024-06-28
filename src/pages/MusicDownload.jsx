@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { scrapeMusicInfo } from "../utils/scraper";
+import { fetchMusicInfo } from "../utils/api";
 
 const MusicDownload = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
 
   const handleSearch = async () => {
-    const fetchedResults = await scrapeMusicInfo(query);
+    const fetchedResults = await fetchMusicInfo(query);
     setResults(fetchedResults);
   };
 
@@ -32,9 +32,9 @@ const MusicDownload = () => {
               <h2 className="text-xl">{result.title} by {result.artist}</h2>
               <div className="flex space-x-2">
                 {result.formats.map((format) => (
-                  <button key={format} className="p-2 bg-green-500 text-white">
-                    Download {format}
-                  </button>
+                  <a key={format.url} href={format.url} download className="p-2 bg-green-500 text-white">
+                    Download {format.quality}
+                  </a>
                 ))}
               </div>
             </div>
