@@ -4,10 +4,16 @@ import { fetchMusicInfo } from "../utils/api";
 const MusicDownload = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
+  const [error, setError] = useState(null);
 
   const handleSearch = async () => {
-    const fetchedResults = await fetchMusicInfo(query);
-    setResults(fetchedResults);
+    try {
+      const fetchedResults = await fetchMusicInfo(query);
+      setResults(fetchedResults);
+      setError(null);
+    } catch (err) {
+      setError("Failed to fetch music information. Please try again.");
+    }
   };
 
   return (
@@ -26,6 +32,7 @@ const MusicDownload = () => {
             Search
           </button>
         </div>
+        {error && <p className="text-red-500 text-center mt-4">{error}</p>}
         <div className="mt-4">
           {results.map((result) => (
             <div key={result.id} className="mb-4">

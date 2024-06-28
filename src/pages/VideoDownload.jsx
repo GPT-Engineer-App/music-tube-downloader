@@ -4,10 +4,16 @@ import { fetchVideoInfo } from "../utils/api";
 const VideoDownload = () => {
   const [url, setUrl] = useState("");
   const [videoInfo, setVideoInfo] = useState(null);
+  const [error, setError] = useState(null);
 
   const handleFetchInfo = async () => {
-    const fetchedInfo = await fetchVideoInfo(url);
-    setVideoInfo(fetchedInfo);
+    try {
+      const fetchedInfo = await fetchVideoInfo(url);
+      setVideoInfo(fetchedInfo);
+      setError(null);
+    } catch (err) {
+      setError("Failed to fetch video information. Please try again.");
+    }
   };
 
   return (
@@ -26,6 +32,7 @@ const VideoDownload = () => {
             Fetch Info
           </button>
         </div>
+        {error && <p className="text-red-500 text-center mt-4">{error}</p>}
         {videoInfo && (
           <div className="mt-4 text-center">
             <h2 className="text-xl">{videoInfo.title}</h2>
