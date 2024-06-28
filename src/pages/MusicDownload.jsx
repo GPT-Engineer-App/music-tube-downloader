@@ -1,16 +1,12 @@
 import React, { useState } from "react";
+import { scrapeMusicInfo } from "../utils/scraper";
 
 const MusicDownload = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
 
   const handleSearch = async () => {
-    // Fetch music results based on the query
-    // This is a placeholder for the actual API call
-    const fetchedResults = [
-      { id: 1, title: "Song 1", artist: "Artist 1", formats: ["mp3", "wav"] },
-      { id: 2, title: "Song 2", artist: "Artist 2", formats: ["mp3", "wav"] },
-    ];
+    const fetchedResults = await scrapeMusicInfo(query);
     setResults(fetchedResults);
   };
 

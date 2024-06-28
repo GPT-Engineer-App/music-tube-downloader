@@ -1,17 +1,12 @@
 import React, { useState } from "react";
+import { scrapeVideoInfo } from "../utils/scraper";
 
 const VideoDownload = () => {
   const [url, setUrl] = useState("");
   const [videoInfo, setVideoInfo] = useState(null);
 
   const handleFetchInfo = async () => {
-    // Fetch video information based on the URL
-    // This is a placeholder for the actual API call
-    const fetchedInfo = {
-      title: "Sample Video",
-      duration: "5:00",
-      thumbnail: "https://via.placeholder.com/150",
-    };
+    const fetchedInfo = await scrapeVideoInfo(url);
     setVideoInfo(fetchedInfo);
   };
 
