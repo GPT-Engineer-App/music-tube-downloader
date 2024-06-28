@@ -1,16 +1,16 @@
 import React from "react";
 
-const Index = () => {
+const About = () => {
   return (
     <div className="h-screen w-screen flex items-center justify-center">
       <div>
-        <h1 className="text-3xl text-center">Welcome to the Music and Video Downloader</h1>
+        <h1 className="text-3xl text-center">About Us</h1>
         <p className="text-center">
-          Use the navigation bar to explore the features.
+          This web application allows you to download music and YouTube videos easily.
         </p>
       </div>
     </div>
   );
 };
 
-export default Index;
+export default About;
